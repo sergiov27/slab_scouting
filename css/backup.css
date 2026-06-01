@@ -1,0 +1,394 @@
+/* ===== GENERAL ===== */
+
+body{
+    font-family: Inter, sans-serif;
+    background-color:#000000;
+    color:white;
+    margin:0;
+}
+
+h2{
+    padding-left:20px;
+    text-align: center;
+}
+
+/* ===== NAVBAR ===== */
+
+.navbar{
+    background:linear-gradient(to right,#000000 0%,#0f172a 50%,#1e293b 100%);
+    height:60px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    font-weight:bold;
+    font-size:18px;
+    color:#ffffff;
+}
+
+.logo-img{
+    height:40px;
+    margin-right:10px;
+}
+
+.navbar nav a{
+    color:#a1a1b5;
+    text-decoration:none;
+    margin-left:20px;
+    font-size:14px;
+    font-family: 'Inter', sans-serif;
+}
+
+.navbar nav a:hover{
+    color:#16a34a;
+}
+
+
+/* ===== FILTROS ===== */
+
+.filtro-minutos{
+    padding:12px;
+    background-color:#1e293b;
+    border-radius:6px;
+    border:1px solid #334155;
+    width:100%;
+    box-sizing:border-box;
+}
+
+.filtro-minutos-scatter{
+    padding:12px;
+    background-color:#1e293b;
+    border-radius:6px;
+    border:1px solid #334155;
+    width:100%;
+    box-sizing:border-box;
+}
+
+.valores-minutos{
+    margin:10px 0;
+    font-size:13px;
+}
+
+.valores-minutos-scatter{
+    margin:10px 0;
+    font-size:13px;
+}
+
+#selectorLigaScatter{
+    width:100%;
+    padding:6px;
+    border-radius:4px;
+    border:1px solid #334155;
+    background-color:#0f172a;
+    color:white;
+}
+
+#selectorLigaScatter option{
+    background-color:#0f172a;
+    color:white;
+}
+
+#selectorPosicion{
+    width:100%;
+    padding:6px;
+    border-radius:4px;
+    border:1px solid #334155;
+    background-color:#0f172a;
+    color:white;
+}
+
+#selectorPosicion option{
+    background-color:#0f172a;
+    color:white;
+}
+
+/* ===== RADAR FILTROS ===== */
+
+.barra-radar{
+    display:flex;
+    align-items:flex-end;
+    gap:20px;
+    margin:20px;
+    padding:15px 20px;
+    background-color:none;
+    border:1px solid none;
+    border-radius:8px;
+    flex-wrap:wrap;
+    justify-content: center;
+}
+
+.filtro-radar-box{
+    background-color:#1e293b;
+    padding:12px;
+    border-radius:6px;
+    border:1px solid #334155;
+    width:220px;
+}
+
+.filtro-radar-box label{
+    color:white;
+    font-size:12px;
+    margin-bottom:6px;
+    display:block;
+}
+
+.filtro-radar-box select{
+    width:100%;
+    padding:6px;
+    border-radius:4px;
+    border:1px solid #334155;
+    background-color:#0f172a;
+    color:white;
+}
+
+/* ===== SLIDER MINUTOS ===== */
+
+#sliderMinutos{
+    margin-top:10px;
+}
+
+#sliderMinutosScatter{
+    margin-top:10px;
+}
+
+/* barra */
+#sliderMinutos.noUi-target{
+    height:6px;
+    background:#ffffff !important;
+    border:none !important;
+    box-shadow:none !important;
+}
+
+#sliderMinutosScatter.noUi-target{
+    height:6px;
+    background:#ffffff !important;
+    border:none !important;
+    box-shadow:none !important;
+}
+
+/* barra conectada */
+#sliderMinutos .noUi-connect{
+    background:#ffd50d !important;
+}
+
+#sliderMinutosScatter .noUi-connect{
+    background:#ffd50d !important;
+}
+
+/* handles */
+#sliderMinutos .noUi-handle{
+
+    width:22px;
+    height:22px;
+
+    right:-11px;      /* centra horizontalmente */
+    top:-8px;         /* centra verticalmente */
+
+    background:#ffd50d !important;
+    border:#000000 !important;
+    border-radius:50% !important;
+
+    box-shadow:none !important;
+    cursor:pointer;
+}
+
+#sliderMinutosScatter .noUi-handle{
+
+    width:22px;
+    height:22px;
+
+    right:-11px;
+    top:-8px;
+
+    background:#ffd50d !important;
+    border:#000000 !important;
+    border-radius:50% !important;
+
+    box-shadow:none !important;
+    cursor:pointer;
+}
+
+/* quitar líneas internas */
+#sliderMinutos .noUi-handle:before,
+#sliderMinutos .noUi-handle:after{
+    display:none;
+}
+
+#sliderMinutosScatter .noUi-handle:before,
+#sliderMinutosScatter .noUi-handle:after{
+    display:none;
+}
+
+#sliderMinutos .noUi-handle:hover{
+transform:scale(1.2);
+}
+
+#sliderMinutosScatter .noUi-handle:hover{
+transform:scale(1.2);
+}
+
+/* ===== LAYOUT TABLA ===== */
+.seccion-tabla{
+    display:flex;
+    gap:12px;
+    margin:20px;
+    align-items:stretch;
+}
+
+.panel-filtros{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    width:235px;
+    min-height:540px;
+    box-sizing:border-box;
+    background-color:"#000000";
+    padding:15px;
+    border: #ffffff;
+    border-right:1px solid #334155;
+    border-radius:0;
+}
+
+.titulo-panel-scouting{
+    margin:0;
+    text-align:center;
+    font-size:18px;
+    font-weight:700;
+    color:#ffffff;
+}
+
+.tabla-wrapper,
+.scatter-wrapper{
+    flex:1;
+    min-height:540px;
+    background-color:#3b82f6;
+    border:1px solid #60a5fa;
+    box-sizing:border-box;
+}
+
+.scatter-wrapper{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.contenedor-tabla{
+    height:500px;
+    overflow-y:auto;
+    overflow-x:auto;
+    margin:20px;
+    border:1px solid #334155;
+    background-color:#111827;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:6px;
+    font-size:12px;
+    border:1px solid #334155;
+    text-align:left;
+}
+
+th{
+    background-color:#1e293b;
+    position:sticky;
+    top:0;
+    cursor:pointer;
+}
+
+th:hover{
+    background-color:#334155;
+}
+
+tr:hover{
+    background-color:#1f2937;
+}
+
+/* ===== TOMSELECT DARK ===== */
+
+.ts-control{
+    background-color:#0f172a !important;
+    border:1px solid #334155 !important;
+    color:white !important;
+}
+
+.ts-dropdown{
+    background:#0f172a !important;
+    border:1px solid #334155 !important;
+    color:white !important;
+}
+
+/* ===== RADARES ===== */
+
+.contenedor-radares{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    margin:20px;
+    flex-wrap:wrap;
+}
+
+.radar-box{
+    width:380px;
+}
+
+.titulo-radar{
+    text-align:center;
+    font-weight:bold;
+    margin-bottom:10px;
+    padding-bottom:6px;
+    border-bottom:1px solid #ffd50d;
+    color:#e5e7eb;
+}
+
+/* ===== SCATTERPLOT ===== */
+
+.scatter-plot{
+    width:100%;
+    height:500px;
+    margin:20px 0 14px 0;
+    box-sizing:border-box;
+}
+
+.scatter-box{
+    background:#1e293b;
+    border-radius:0;
+    padding:12px;
+    width:100%;
+    height:100%;
+    box-sizing:border-box;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.scatter-box canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100%;
+    max-height: 88%;
+}
+
+.scatter-controles{
+display:flex;
+gap:20px;
+width:90%;
+margin:auto;
+margin-top:20px;
+justify-content:center;
+}
+
+.control-box{
+display:flex;
+flex-direction:column;
+}

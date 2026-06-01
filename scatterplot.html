@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>SCOUT PRO 360°</title>
+
+<link rel="stylesheet" href="css/styles.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.css">
+<script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.js"></script>
+
+<script defer src="js/scatterplot.js"></script>
+<script defer src="portada.js"></script>
+
+</head>
+
+<body class="page-scatter">
+
+<header class="navbar">
+
+<div class="logo">
+<img src="logo_nobg.png" alt="Logo" class="logo-img">
+SCOUT PRO 360°
+</div>
+
+<nav>
+<a href="portada.html"><b>INICIO</a></b>
+<a href="dashboard.html"><b>DASHBOARD</a></b>
+<a href="scatterplot.html"><b>SCOUTING</a></b>
+<a href="ficha_individual.html"><b>FICHA INDIVIDUAL</a></b>
+<a href="#" id="btnCerrarSesion"><b>CERRAR SESION</a></b>
+</nav>
+
+</header>
+
+<div class="seccion-tabla">
+    <div class="panel-filtros">
+        <h3 class="titulo-panel-scouting">Panel de Scouting</h3>
+        <div class="filtros-inline">
+            <div class="filtro-general">
+                <label><strong>Competición</strong></label>
+                <div style="color:white;font-weight:600;padding:4px 0;">Liga 1 2026</div>
+            </div>
+            <div class="filtro-general">
+                <label><strong>Seleccionar Posición</strong></label>
+                <select id="selectorPosicion">
+                    <option value="todos">Todos</option>
+                    <option value="delantero">Delantero</option>
+                    <option value="mediocentro">Mediocentro</option>
+                    <option value="defensa">Defensa Central</option>
+                    <option value="extremo">Extremo</option>
+                    <option value="lateral">Lateral</option>
+                </select>
+            </div>
+        </div>
+        <div class="filtro-minutos-scatter">
+            <label><strong>Minutos Jugados</strong></label>
+            <div class="valores-minutos-scatter">
+                <span id="minValorScatter">0</span> -
+                <span id="maxValorScatter">0</span>
+            </div>
+            <div id="sliderMinutosScatter"></div>
+        </div>
+        <div class="filtro-minutos-scatter">
+            <label><strong id="tituloSliderMetricaX">Medida X</strong></label>
+            <div class="valores-minutos-scatter">
+                <span id="minValorXScatter">0</span> -
+                <span id="maxValorXScatter">0</span>
+            </div>
+            <div id="sliderMetricaXScatter"></div>
+        </div>
+        <div class="filtro-minutos-scatter">
+            <label><strong id="tituloSliderMetricaY">Medida Y</strong></label>
+            <div class="valores-minutos-scatter">
+                <span id="minValorYScatter">0</span> -
+                <span id="maxValorYScatter">0</span>
+            </div>
+            <div id="sliderMetricaYScatter"></div>
+        </div>
+    </div>
+    <div class="scatter-wrapper">
+        <div class="scatter-plot">
+            <div class="scatter-controles scatter-controles-superior">
+                <div class="control-box">
+                    <label><strong>Seleccionar medida 1</strong></label>
+                    <select id="metricaX"></select>
+                </div>
+                <div class="control-box">
+                    <label><strong>Seleccionar medida 2</strong></label>
+                    <select id="metricaY"></select>
+                </div>
+                <div class="titulo-metricas-vs" id="tituloComparacionMetricas">Medida X vs Medida Y</div>
+            </div>
+            <div class="scatter-box">
+                <canvas id="scatterChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2>Comparador de Jugadores</h2>
+
+<div class="barra-radar">
+
+<div class="filtro-radar-box">
+<label>Jugador 1</label>
+<select id="jugador1"></select>
+</div>
+
+<div class="filtro-radar-box">
+<label>Jugador 2</label>
+<select id="jugador2"></select>
+</div>
+
+</div>
+
+<div class="contenedor-radares">
+
+<div class="radar-box">
+<div class="titulo-radar">Perfil Ofensivo</div>
+<canvas id="radarChart"></canvas>
+</div>
+
+<div class="radar-box">
+<div class="titulo-radar">Perfil Defensivo</div>
+<canvas id="radarDefensivo"></canvas>
+</div>
+
+<div class="radar-box">
+<div class="titulo-radar">Perfil Creativo</div>
+<canvas id="radarCreacion"></canvas>
+</div>
+
+</div>
+
+<p class="nota-radares">Las metricas mostradas corresponden a acciones exitosas (p. ej., pases progresivos completados, regates exitosos).</p>
+
+</body>
+</html>

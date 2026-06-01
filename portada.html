@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCOUT PRO - Portada</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2" rel="stylesheet">
+    <script defer src="portada.js"></script>
+</head>
+<body class="page-portada-home">
+
+<header class="navbar">
+    <div class="logo">
+        <img src="logo_nobg.png" alt="Logo" class="logo-img">
+        SCOUT PRO 360°
+    </div>
+    <nav>
+        <a href="#" id="btnCerrarSesion"><b>CERRAR SESIÓN</b></a>
+    </nav>
+</header>
+
+<main class="home-wrapper">
+    <section class="home-card-principal">
+        <img src="logo_nobg.png" alt="SCOUT PRO" class="home-logo">
+        <h1 class="home-titulo">Bienvenido a Scout Pro 360°</h1>
+        <p class="home-subtitulo">Selecciona una sección para continuar</p>
+        <p class="home-usuario">Sesión iniciada como <span id="usuarioActivo">usuario</span></p>
+    </section>
+
+    <section class="home-grid-secciones">
+        <a href="dashboard.html" class="home-seccion-link">
+            <article class="home-seccion-card">
+                <h2>Dashboard</h2>
+                <p>Vista general de jugadores y filtros por posición/minutos.</p>
+            </article>
+        </a>
+
+        <a href="scatterplot.html" class="home-seccion-link">
+            <article class="home-seccion-card">
+                <h2>Scouting</h2>
+                <p>Análisis comparativo, scatter y radares entre jugadores.</p>
+            </article>
+        </a>
+
+        <a href="ficha_individual.html" class="home-seccion-link">
+            <article class="home-seccion-card">
+                <h2>Ficha Individual</h2>
+                <p>Detalle de perfil, percentiles y jugadores similares.</p>
+            </article>
+        </a>
+    </section>
+</main>
+
+</body>
+</html>

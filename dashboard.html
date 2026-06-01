@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>SCOUT PRO - SLAB</title>
+
+<link rel="stylesheet" href="css/styles.css">
+<link href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.css">
+<script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.js"></script>
+
+<script defer src="js/main.js"></script>
+<script defer src="portada.js"></script>
+
+</head>
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+<img src="logo_nobg.png" alt="Logo" class="logo-img">
+SCOUT PRO - SLAB
+</div>
+
+<nav>
+<a href="portada.html"><b>INICIO</a></b>
+<a href="dashboard.html"><b>DASHBOARD</a></b>
+<a href="scatterplot.html"><b>SCOUTING</a></b>
+<a href="ficha_individual.html"><b>FICHA INDIVIDUAL</a></b>
+<a href="#" id="btnCerrarSesion"><b>CERRAR SESION</a></b>
+</nav>
+
+</header>
+
+<div class="seccion-tabla">
+
+<div class="panel-filtros">
+    <h3 class="titulo-panel-scouting">Vista General</h3>
+
+<div class="filtro-minutos">
+
+<label><strong>Competición</strong></label>
+<div style="color:white;font-weight:600;padding:4px 0;">Torneo Juvenil Sub-18</div>
+
+</div>
+
+<div class="filtro-minutos">
+
+<label><strong>Minutos Jugados</strong></label>
+
+<div class="valores-minutos">
+<span id="minValor">0</span> -
+<span id="maxValor">0</span>
+</div>
+
+<div id="sliderMinutos"></div>
+
+</div>
+
+<div class="filtro-general">
+
+<label><strong>Seleccionar Posición</strong></label>
+
+<select id="selectorPosicion">
+<option value="todos">Todos</option>
+<option value="delantero">Delantero</option>
+<option value="mediocentro">Mediocentro</option>
+<option value="defensa">Defensa Central</option>
+<option value="extremo">Extremo</option>
+<option value="lateral">Lateral</option>
+</select>
+
+</div>
+
+</div>
+
+<div class="tabla-wrapper">
+
+<div class="contenedor-tabla">
+<table id="tabla_database"></table>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -17,25 +17,32 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.css">
 <script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.js"></script>
 
-<script defer src="js/main.js"></script>
+<script defer src="js/dashboard.js"></script>
 <script defer src="portada.js"></script>
 
 </head>
-<body>
+<body class="dashboard has-sidebar">
 
 <header class="navbar">
 
-<div class="logo">
-<img src="logo_nobg.png" alt="Logo" class="logo-img">
-SCOUT PRO - SLAB
-</div>
+    <button id="btnToggleSidebar"
+            class="sidebar-toggle"
+            aria-label="Toggle sidebar">
+        ☰
+    </button>
 
+    <div class="logo">
+        <img src="logo_nobg.png" alt="Logo" class="logo-img">
+        <span class="nav-text">SCOUTING DATA DRIVEN FPF</span>
+    </div>
+    
 <nav>
-<a href="portada.html"><b>INICIO</a></b>
-<a href="dashboard.html"><b>DASHBOARD</a></b>
-<a href="scatterplot.html"><b>SCOUTING</a></b>
-<a href="ficha_individual.html"><b>FICHA INDIVIDUAL</a></b>
-<a href="#" id="btnCerrarSesion"><b>CERRAR SESION</a></b>
+<a href="portada.html"><span class="nav-text">Inicio</span></a>
+<a href="dashboard.html"><span class="nav-text">General</span></a></b>
+<a href="scatterplot.html"><span class="nav-text">Análisis Comparativo</span></a>
+<a href="radar_chart.html"><span class="nav-text">Radar</span></a>
+<a href="ficha_individual.html"><span class="nav-text">Ficha Individual</span></a>
+<a href="#" id="btnCerrarSesion"><span class="nav-text">CERRAR SESION</span></a>
 </nav>
 
 </header>
@@ -48,7 +55,7 @@ SCOUT PRO - SLAB
 <div class="filtro-minutos">
 
 <label><strong>Competición</strong></label>
-<div style="color:white;font-weight:600;padding:4px 0;">Torneo Juvenil Sub-18</div>
+<div>Liga 1 2026</div>
 
 </div>
 

@@ -11,12 +11,13 @@ let ordenActual = {
     asc: true
 };
 
+const escudoClub = document.querySelector(".escudoClub");
 const rutaDatabase = "liga1_database.json";
 const rutaPercentiles = "liga1_percentiles.json";
 
 const columnasDatabase = [
     "jugador",
-    "equipo_durante_el_periodo_seleccionado",
+    "equipo_periodo",
     "posicion_1",
     "edad",
     "pie",
@@ -31,7 +32,7 @@ const columnasDatabase = [
 
 const nombresColumnas = {
     jugador: "Jugador",
-    equipo_durante_el_periodo_seleccionado: "Equipo",
+    equipo_periodo: "Club",
     posicion_1: "Posición",
     edad: "Edad",
     pie: "Pie",
@@ -43,6 +44,44 @@ const nombresColumnas = {
     x_g: "xG",
     x_a: "xA"
 };
+
+	const escudosPeruPorClub = {
+		"ADT": "adt.png",
+		"Alianza Atletico": "alianza_atletico.PNG",
+		"Alianza Atlético": "alianza_atletico.PNG",
+		"Alianza AtlÃ©tico": "alianza_atletico.PNG",
+		"Alianza Lima": "alianza_lima.png",
+		"Atletico Grau": "atletico_grau.png",
+		"Atlético Grau": "atletico_grau.png",
+		"AtlÃ©tico Grau": "atletico_grau.png",
+		"FC Cajamarca": "cajamarca.png",
+		"Los Chankas": "chankas.png",
+		"Cienciano": "cienciano.png",
+		"Comerciantes Unidos": "comerciantes.png",
+		"Cusco": "cusco.png",
+		"Deportivo Garcilaso": "garcilaso.png",
+		"Sport Huancayo": "huancayo.png",
+		"Juan Pablo II College": "juanpablo.png",
+		"Melgar": "melgar.png",
+		"CD Moquegua": "moquegua.png",
+		"Sport Boys": "sport_boys.png",
+		"Sporting Cristal": "sporting_cristal.png",
+		"Universitario": "universitario.png",
+		"UTC Cajamarca": "utc.png"
+	};
+
+function obtenerIniciales(nombre){
+
+    if(!nombre) return "";
+
+    return nombre
+        .split(" ")
+        .slice(0,2)
+        .map(p => p[0])
+        .join("")
+        .toUpperCase();
+
+}
 
 function renderTabla(data, tableId, columnas) {
 
@@ -69,10 +108,167 @@ function renderTabla(data, tableId, columnas) {
 
         columnas.forEach(col => {
 
-            let cell = row.insertCell();
-            cell.textContent = fila[col] ?? "";
+    let cell = row.insertCell();
 
-        });
+    // JUGADOR
+    if(col === "jugador"){
+
+        cell.innerHTML = `
+            <div class="player-cell">
+
+                <div class="player-avatar">
+                    ${obtenerIniciales(fila.jugador)}
+                </div>
+
+                <div class="player-info">
+
+                    <div class="player-name">
+                        ${fila.jugador}
+                    </div>
+
+                    <div class="player-team">
+                        ${fila.equipo_periodo}
+                    </div>
+
+                </div>
+
+            </div>
+        `;
+    }
+
+    // POSICION
+    else if(col === "posicion_1"){
+
+        cell.innerHTML = `
+            <span class="badge-posicion">
+                ${fila[col]}
+            </span>
+        `;
+    }
+
+    // EDAD
+    else if(col === "edad"){
+
+        cell.style.textAlign = "center";
+
+        let clase = "";
+
+        if(fila.edad <= 23){
+            clase = "edad-joven";
+        }
+        else if(fila.edad <= 29){
+            clase = "edad-prime";
+        }
+        else{
+            clase = "edad-veterano";
+        }
+
+        cell.innerHTML = `
+            <span class="${clase}">
+                ${fila.edad}
+            </span>
+        `;
+    }
+
+    // GOLES
+    else if(col === "goles"){
+
+        cell.textContent = fila.goles ?? "";
+
+    }
+
+
+    /* xG */
+
+    else if(col === "x_g"){
+
+        const xg = Number(fila.x_g) || 0;
+
+            const maxXG = Math.max(
+        ...dataOriginal.map(j => Number(j.x_g) || 0)
+        );
+
+        const porcentaje = (xg / maxXG) * 100;
+
+        cell.innerHTML = `
+            <div class="metrica">
+
+                <span>${xg.toFixed(2)}</span>
+
+                <div class="barra">
+
+                    <div
+                        class="relleno"
+                        style="width:${Math.min(xg * 10,100)}%">
+                    </div>
+
+                </div>
+
+            </div>
+        `;
+    }
+
+    /* xA */
+else if(col === "x_a"){
+
+    const xa = Number(fila.x_a) || 0;
+
+        const maxXA = Math.max(
+        ...dataOriginal.map(j => Number(j.x_a) || 0)
+    );
+
+    const porcentaje = (xa / maxXA) * 100;
+
+
+    cell.innerHTML = `
+        <div class="metrica">
+
+            <span>${xa.toFixed(2)}</span>
+
+            <div class="barra">
+
+                <div
+                    class="relleno"
+                    style="width:${Math.min(xa * 20,100)}%">
+                </div>
+
+            </div>
+
+        </div>
+    `;
+}
+
+    else if(col === "equipo_periodo"){
+
+    const nombreClub = fila[col];
+    const archivoEscudo = escudosPeruPorClub[nombreClub];
+
+    if(archivoEscudo){
+
+        cell.innerHTML = `
+            <img
+                src="Imagenes/Escudos/peru/${archivoEscudo}"
+                class="escudo-club"
+                alt="${nombreClub}"
+                title="${nombreClub}"
+            >
+        `;
+
+    }else{
+
+        cell.textContent = nombreClub ?? "";
+
+    }
+
+}
+
+else{
+
+    cell.textContent = fila[col] ?? "";
+
+}
+
+});
 
     });
 
@@ -113,6 +309,7 @@ function ordenarTabla(columna) {
 
 }
 
+
 function configurarSlider() {
 
     const minutos = dataOriginal.map(j => parseInt(j.minutos_jugados) || 0);
@@ -137,6 +334,52 @@ function configurarSlider() {
         }
 
     });
+
+    function configurarSliderEdad(){
+
+    const edades =
+        dataOriginal.map(j => parseInt(j.edad) || 0);
+
+    const minEdadGlobal = Math.min(...edades);
+    const maxEdadGlobal = Math.max(...edades);
+
+    const sliderEdad =
+        document.getElementById("sliderEdad");
+
+    if(sliderEdad.noUiSlider){
+        sliderEdad.noUiSlider.destroy();
+    }
+
+    noUiSlider.create(sliderEdad,{
+
+        start:[minEdadGlobal,maxEdadGlobal],
+        connect:true,
+        step:1,
+
+        range:{
+            min:minEdadGlobal,
+            max:maxEdadGlobal
+        }
+
+    });
+
+    document.getElementById("minEdad").textContent =
+        minEdadGlobal;
+
+    document.getElementById("maxEdad").textContent =
+        maxEdadGlobal;
+
+    sliderEdad.noUiSlider.on("update",function(values){
+
+        document.getElementById("minEdad").textContent =
+            Math.round(values[0]);
+
+        document.getElementById("maxEdad").textContent =
+            Math.round(values[1]);
+
+    });
+
+}
 
     document.getElementById("minValor").textContent = minGlobal;
     document.getElementById("maxValor").textContent = maxGlobal;
@@ -466,6 +709,7 @@ dataPercentiles=percentiles;
 renderTabla(dataFiltrada,"tabla_database",columnasDatabase);
 
 configurarSlider();
+configurarSliderEdad();
 
 const select1=document.getElementById("jugador1");
 const select2=document.getElementById("jugador2");

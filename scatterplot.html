@@ -22,24 +22,35 @@
 
 </head>
 
-<body class="page-scatter">
+<body class="page-scatter has-sidebar">
 
 <header class="navbar">
 
-<div class="logo">
-<img src="logo_nobg.png" alt="Logo" class="logo-img">
-SCOUT PRO 360°
-</div>
+    <button id="btnToggleSidebar"
+            class="sidebar-toggle"
+            aria-label="Toggle sidebar">
+        ☰
+    </button>
+
+    <div class="logo">
+        <img src="logo_nobg.png" alt="Logo" class="logo-img">
+        <span class="nav-text">SCOUTING DATA DRIVEN FPF</span>
+    </div>
 
 <nav>
-<a href="portada.html"><b>INICIO</a></b>
-<a href="dashboard.html"><b>DASHBOARD</a></b>
-<a href="scatterplot.html"><b>SCOUTING</a></b>
-<a href="ficha_individual.html"><b>FICHA INDIVIDUAL</a></b>
-<a href="#" id="btnCerrarSesion"><b>CERRAR SESION</a></b>
+<a href="portada.html"><span class="nav-text">Inicio</span></a>
+<a href="dashboard.html"><span class="nav-text">General</span></a></b>
+<a href="scatterplot.html"><span class="nav-text">Análisis Comparativo</span></a>
+<a href="radar_chart.html"><span class="nav-text">Radar</span></a>
+<a href="ficha_individual.html"><span class="nav-text">Ficha Individual</span></a>
+<a href="#" id="btnCerrarSesion"><span class="nav-text">CERRAR SESION</span></a>
 </nav>
 
 </header>
+
+<main class="page-content-scatter">
+
+<h2 class="titulo-principal-scouting">Análisis Comparativo</h2>
 
 <div class="seccion-tabla">
     <div class="panel-filtros">
@@ -47,7 +58,7 @@ SCOUT PRO 360°
         <div class="filtros-inline">
             <div class="filtro-general">
                 <label><strong>Competición</strong></label>
-                <div style="color:white;font-weight:600;padding:4px 0;">Liga 1 2026</div>
+                <div class="nombre-opcion"">Liga 1 2026</div>
             </div>
             <div class="filtro-general">
                 <label><strong>Seleccionar Posición</strong></label>
@@ -61,6 +72,14 @@ SCOUT PRO 360°
                 </select>
             </div>
         </div>
+            <div class="control-box">
+                <label><strong>Seleccionar medida 1</strong></label>
+                <select id="metricaX"></select>
+            </div>
+            <div class="control-box">
+                <label><strong>Seleccionar medida 2</strong></label>
+                <select id="metricaY"></select>
+            </div>
         <div class="filtro-minutos-scatter">
             <label><strong>Minutos Jugados</strong></label>
             <div class="valores-minutos-scatter">
@@ -89,14 +108,6 @@ SCOUT PRO 360°
     <div class="scatter-wrapper">
         <div class="scatter-plot">
             <div class="scatter-controles scatter-controles-superior">
-                <div class="control-box">
-                    <label><strong>Seleccionar medida 1</strong></label>
-                    <select id="metricaX"></select>
-                </div>
-                <div class="control-box">
-                    <label><strong>Seleccionar medida 2</strong></label>
-                    <select id="metricaY"></select>
-                </div>
                 <div class="titulo-metricas-vs" id="tituloComparacionMetricas">Medida X vs Medida Y</div>
             </div>
             <div class="scatter-box">
@@ -106,42 +117,7 @@ SCOUT PRO 360°
     </div>
 </div>
 
-<h2>Comparador de Jugadores</h2>
-
-<div class="barra-radar">
-
-<div class="filtro-radar-box">
-<label>Jugador 1</label>
-<select id="jugador1"></select>
-</div>
-
-<div class="filtro-radar-box">
-<label>Jugador 2</label>
-<select id="jugador2"></select>
-</div>
-
-</div>
-
-<div class="contenedor-radares">
-
-<div class="radar-box">
-<div class="titulo-radar">Perfil Ofensivo</div>
-<canvas id="radarChart"></canvas>
-</div>
-
-<div class="radar-box">
-<div class="titulo-radar">Perfil Defensivo</div>
-<canvas id="radarDefensivo"></canvas>
-</div>
-
-<div class="radar-box">
-<div class="titulo-radar">Perfil Creativo</div>
-<canvas id="radarCreacion"></canvas>
-</div>
-
-</div>
-
-<p class="nota-radares">Las metricas mostradas corresponden a acciones exitosas (p. ej., pases progresivos completados, regates exitosos).</p>
+</main>
 
 </body>
 </html>

@@ -3,16 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
 let scatterChart;
 let dataOriginal = [];
 let dataActual = [];
-let dataPercentiles = [];
-let radarChart;
-let radarDefensivo;
-let radarCreacion;
-
-
 
 // rutas de datos
 const rutaDatabase = "liga1_database.json";
-const rutaPercentiles = "liga1_percentiles.json";
 
 // métricas fijas
 const metricasFijas = [
@@ -86,63 +79,6 @@ function ordenarOpcionesSelect(selector, mantenerPrimera = false) {
     opciones.forEach(opcion => select.appendChild(opcion));
 }
 
-const metricasRadar = [
-{key:"percentil_duelos_aereos_ganados_90",label:"Duelos Aereos"},
-{key:"percentil_goles_excepto_los_penaltis_90",label:"Goles s/p"},
-{key:"percentil_acciones_de_ataque_exitosas_90",label:"Acciones Ofensivas"},
-{key:"percentil_x_g_90",label:"xG"},
-{key:"percentil_asistencias_90",label:"Asistencias"},
-{key:"percentil_duelos_ofensivos_ganados_90",label:"Duelos Ofensivos"},
-{key:"percentil_asistencias_tiro_90",label:"Asist. de Remate"},
-{key:"percentil_carreras_en_progresion_90",label:"Conducciones Progresivas"},
-{key:"percentil_regates_exitosos_90",label:"Regates Exitosos"},
-{key:"percentil_remates_90",label:"Remates"}
-];
-
-const metricasDefensivas = [
-{key:"percentil_padj_interceptaciones",label:"Padj. Interceptaciones"},
-{key:"percentil_padj_entradas",label:"Padj. Entradas"},
-{key:"percentil_duelos_defensivos_ganados_90",label:"Duelos Defensivos"},
-{key:"percentil_tiros_interceptados_90",label:"Tiros Bloqueados"},
-{key:"percentil_duelos_aereos_ganados_90",label:"Duelos Aereos"}
-];
-
-const metricasCreacion = [
-{key:"percentil_pases_progresivos_precisos_90",label:"Pases Progresivos"},
-{key:"percentil_pases_en_profundidad_exitosos_90",label:"Pases en Profundidad"},
-{key:"percentil_pases_largos_precisos_90",label:"Pases Largos"},
-{key:"percentil_pases_ultimo_tercio_precisos_90",label:"Pases Ultimo Tercio"},
-{key:"percentil_centros_precisos_90",label:"Centros Precisos"},
-{key:"percentil_jugadas_claves_90",label:"Jugadas Claves"}
-];
-
-const radarDataLabels = {
-formatter:(value)=>Math.round(value),
-textAlign:"center",
-borderRadius:50,
-padding:8,
-font:{
-weight:"bold",
-size:10
-},
-color:function(context){
-return context.dataset.borderColor === "#ffd50d"
-? "#0f172a"
-: "#ffffff";
-},
-backgroundColor:function(context){
-return context.dataset.borderColor;
-}
-};
-
-// Normalizar percentiles: si vienen en 0-1, convertir a 0-100
-function normalizarPercentil(v){
-    if (v === null || v === undefined) return 0;
-    const n = Number(v);
-    if (!Number.isFinite(n)) return 0;
-    return n <= 1 ? n * 100 : n;
-}
-
 
 // ====== CREAR GRÁFICO ======
 const canvas = document.getElementById("scatterChart");
@@ -166,17 +102,21 @@ scatterChart = new Chart(ctx, {
             label: "Jugadores",
             data: [],
             backgroundColor: "rgba(255, 213, 13, 0.85)",
-            pointRadius: 8,
-            pointHoverRadius: 10
+            borderColor: "rgba(0, 0, 0, 8)",
+            pointRadius: 22,
+            pointHoverRadius: 40
         }]
     },
     options: {
         responsive: true,
         maintainAspectRatio: true,
-        aspectRatio: 3.5,
+        aspectRatio: 1.9,
         layout: {
             padding: {
-                top: 0
+                top: 0, 
+                bottom: 10,
+                left: 0, 
+                right: 0
             }
         },
         plugins: {
@@ -184,20 +124,20 @@ scatterChart = new Chart(ctx, {
         position: "bottom",
         align: "center",
         labels: {
-            color: "#ffffff",
+            color: "#e8e8e8",
             padding: 18
         }
     },
     datalabels: {
         display: true,
-        color: "#ffffff",
+        color: "#e8e8e8",
         formatter: (value) => value.jugador,
         align: "top",
         anchor: "end",
         offset: 6,
         clip: false,
         font: {
-            size: 10,
+            size: 13,
             weight: "600"
         }
     },
@@ -212,14 +152,23 @@ scatterChart = new Chart(ctx, {
 },
         scales: {
     x: {
-        title: { display: true, text: "Métrica X", color: "#ffffff" },
-        ticks: { color: "#ffffff" },
-        grid: { color: "rgba(209, 213, 219, 0.5)"  }
+        title: { display: true, text: "Métrica X", 
+            font: {
+                size: 20,
+                weight: "bold"
+            },
+            color: "#e8e8e8" },
+        ticks: { color: "#e8e8e8", padding: 15},
+        grid: { color: "rgba(238, 241, 245, 0.5)"  }
     },
     y: {
-        title: { display: true, text: "Métrica Y", color: "#ffffff" },
-        ticks: { color: "#ffffff" },
-        grid: { color: "rgba(209, 213, 219, 0.5)" }
+        title: { display: true, text: "Métrica Y",
+            font: {
+                size: 20,
+                weight: "bold"
+            }, color: "#e8e8e8"},
+        ticks: { color: "#e8e8e8", padding: 15},
+        grid: { color: "rgba(238, 241, 245, 0.5)" }
     }
 }
     }
@@ -465,253 +414,18 @@ function actualizarScatter() {
     scatterChart.update();
 }
 
-function crearRadarInicial(){
-
-const ctx=document.getElementById("radarChart");
-if (!ctx) return;
-
-radarChart=new Chart(ctx,{
-type:"radar",
-data:{
-labels:metricasRadar.map(m=>m.label),
-datasets:[]
-},
-options:{
-responsive:true,
-scales:{
-r:{
-min:0,
-max:100,
-ticks:{display:false},
-pointLabels:{color:"white"},
-grid:{color:"#334155"}
-}
-},
-plugins:{
-legend:{
-position:"top",
-labels:{color:"white"}
-},
-datalabels: radarDataLabels
-}
-}
-});
-
-}
-
-function crearRadarDefensivo(){
-
-const ctx=document.getElementById("radarDefensivo");
-if (!ctx) return;
-
-radarDefensivo=new Chart(ctx,{
-type:"radar",
-data:{
-labels:metricasDefensivas.map(m=>m.label),
-datasets:[]
-},
-options:{
-responsive:true,
-scales:{
-r:{
-min:0,
-max:100,
-ticks:{display:false},
-pointLabels:{color:"white"},
-grid:{color:"#334155"}
-}
-},
-plugins:{
-legend:{labels:{color:"white"}},
-datalabels: radarDataLabels
-}
-}
-});
-
-}
-
-function crearRadarCreacion(){
-
-const ctx=document.getElementById("radarCreacion");
-if (!ctx) return;
-
-radarCreacion=new Chart(ctx,{
-type:"radar",
-data:{
-labels:metricasCreacion.map(m=>m.label),
-datasets:[]
-},
-options:{
-responsive:true,
-scales:{
-r:{
-min:0,
-max:100,
-ticks:{display:false},
-pointLabels:{color:"white"},
-grid:{color:"#334155"}
-}
-},
-plugins:{
-legend:{labels:{color:"white"}},
-datalabels: radarDataLabels
-}
-}
-});
-
-}
-
-function actualizarRadar(){
-
-if(!radarChart||!radarDefensivo||!radarCreacion)return;
-
-const jugador1=document.getElementById("jugador1")?.value;
-const jugador2=document.getElementById("jugador2")?.value;
-
-const datos1=dataPercentiles.find(j=>j.jugador===jugador1);
-const datos2=dataPercentiles.find(j=>j.jugador===jugador2);
-
-if(!datos1||!datos2)return;
-
-radarChart.data.datasets=[
-{
-label:jugador1,
-data:metricasRadar.map(m=>normalizarPercentil(datos1?.[m.key])||0),
-borderColor:"#10b981",
-backgroundColor:"rgba(255,213,13,0.2)"
-},
-{
-label:jugador2,
-data:metricasRadar.map(m=>normalizarPercentil(datos2?.[m.key])||0),
-borderColor:"#FFD50D",
-backgroundColor:"rgba(59,130,246,0.2)"
-}
-];
-
-radarDefensivo.data.datasets=[
-{
-label:jugador1,
-data:metricasDefensivas.map(m=>normalizarPercentil(datos1?.[m.key])||0),
-borderColor:"#10b981",
-backgroundColor:"rgba(255,213,13,0.2)"
-},
-{
-label:jugador2,
-data:metricasDefensivas.map(m=>normalizarPercentil(datos2?.[m.key])||0),
-borderColor:"#FFD50D",
-backgroundColor:"rgba(59,130,246,0.2)"
-}
-];
-
-radarCreacion.data.datasets=[
-{
-label:jugador1,
-data:metricasCreacion.map(m=>normalizarPercentil(datos1?.[m.key])||0),
-borderColor:"#10b981",
-backgroundColor:"rgba(255,213,13,0.2)"
-},
-{
-label:jugador2,
-data:metricasCreacion.map(m=>normalizarPercentil(datos2?.[m.key])||0),
-borderColor:"#FFD50D",
-backgroundColor:"rgba(59,130,246,0.2)"
-}
-];
-
-radarChart.update();
-radarDefensivo.update();
-radarCreacion.update();
-
-}
-
-function cargarSelectores() {
-
-const select1 = document.getElementById("jugador1");
-const select2 = document.getElementById("jugador2");
-
-if(!select1||!select2)return;
-
-select1.innerHTML = "";
-select2.innerHTML = "";
-
-dataPercentiles.forEach(jugador => {
-
-    let option1 = document.createElement("option");
-
-    option1.value = jugador.jugador;
-    option1.textContent = jugador.jugador;
-
-    let option2 = option1.cloneNode(true);
-
-    select1.appendChild(option1);
-    select2.appendChild(option2);
-
-});
-// preseleccionar primeros jugadores si existen
-if (select1.options.length > 0) select1.selectedIndex = 0;
-if (select2.options.length > 1) select2.selectedIndex = 1;
-
-select1.addEventListener("change", actualizarRadar);
-select2.addEventListener("change", actualizarRadar);
-
-new TomSelect("#jugador1", {
-    create:false,
-    maxItems:1,
-    maxOptions:null,
-    sortField:{field:"text",direction:"asc"},
-    dropdownParent:"body",
-    placeholder:"Buscar jugador..."
-});
-
-new TomSelect("#jugador2", {
-    create:false,
-    maxItems:1,
-    maxOptions:null,
-    sortField:{field:"text",direction:"asc"},
-    dropdownParent:"body",
-    placeholder:"Buscar jugador..."
-});
-
-// actualizar radares con selección por defecto
-actualizarRadar();
-
-}
-
 // ====== CARGAR DATOS ======
 function cargarDatos() {
 
-    Promise.all([
-        fetch(rutaDatabase).then(r => r.json()),
-        fetch(rutaPercentiles).then(r => r.json())
-    ])
-    .then(([database, percentiles]) => {
+    fetch(rutaDatabase)
+    .then(r => r.json())
+    .then(database => {
 
         console.log("Datos cargados:", database);
 
         dataOriginal = database;
-        dataPercentiles = percentiles;
         configurarSlidersMetricasScatter();
         configurarSliderMinutosScatter();
-
-        const select1 = document.getElementById("jugador1");
-        const select2 = document.getElementById("jugador2");
-
-        if (select1?.tomselect) select1.tomselect.destroy();
-        if (select2?.tomselect) select2.tomselect.destroy();
-
-        cargarSelectores();
-
-        if (radarChart && radarDefensivo && radarCreacion) {
-            radarChart.data.datasets=[];
-            radarDefensivo.data.datasets=[];
-            radarCreacion.data.datasets=[];
-
-            radarChart.update();
-            radarDefensivo.update();
-            radarCreacion.update();
-            // rellenar radares con datos actuales (si hay selecciones por defecto)
-            actualizarRadar();
-        }
 
     })
     .catch(err => {
@@ -741,9 +455,6 @@ document.getElementById("selectorPosicion")
 llenarSelectMetricas();
 ordenarOpcionesSelect("#selectorPosicion", true);
 actualizarTitulosSlidersMetricas();
-crearRadarInicial();
-crearRadarDefensivo();
-crearRadarCreacion();
 configurarSlidersMetricasScatter();
 cargarDatos();
 
@@ -752,4 +463,5 @@ new TomSelect("#metricaX");
 new TomSelect("#metricaY");
 
 });
+
 

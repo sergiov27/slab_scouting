@@ -24,109 +24,148 @@
 <script defer src="portada.js"></script>
 
 </head>
-<body>
-    <header class="navbar">
+<body class="has-sidebar">
+<header class="navbar">
 
-<div class="logo">
-<img src="logo_nobg.png" alt="Logo" class="logo-img">
-FICHA INDIVIDUAL
-</div>
+    <button id="btnToggleSidebar"
+            class="sidebar-toggle"
+            aria-label="Toggle sidebar">
+        ☰
+    </button>
 
-<nav>
-<a href="portada.html"><b>INICIO</a></b>
-<a href="dashboard.html"><b>DASHBOARD</a></b>
-<a href="scatterplot.html"><b>SCOUTING</a></b>
-<a href="ficha_individual.html"><b>FICHA INDIVIDUAL</a></b> 
-<a href="#" id="btnCerrarSesion"><b>CERRAR SESION</a></b>
-</nav>
+    <div class="logo">
+        <img src="logo_nobg.png" alt="Logo" class="logo-img">
+        <span class="nav-text">SCOUTING DATA DRIVEN FPF</span>
+    </div>
+    <nav>
+        <a href="portada.html"><span class="nav-text">Inicio</span></a>
+        <a href="dashboard.html"><span class="nav-text">General</span></a></b>
+        <a href="scatterplot.html"><span class="nav-text">Análisis Comparativo</span></a>
+        <a href="radar_chart.html"><span class="nav-text">Radar</span></a>
+        <a href="ficha_individual.html"><span class="nav-text">Ficha Individual</span></a>
+        <a href="#" id="btnCerrarSesion"><span class="nav-text">CERRAR SESION</span></a>
+    </nav>
 
 </header>
 
-<div class="filtros-inline ficha-filtros">
-    <div class="ficha-titulo-bloque">
-        <h1>Ficha de Jugador</h1>
+    <div class="filtros-inline ficha-filtros">
+        <div class="ficha-titulo-bloque">
+            <h2>Reporte de Jugador</h2>
+        </div>
+        <div class="filtro-general">
+            <label><strong>Seleccionar Competición</strong></label>
+            <div class="competicion-valor">Liga 1 2026</div>
+        </div>
+        <div class="filtro-general">
+            <label><strong>Seleccionar Jugador</strong></label>
+            <select id="selectorJugadorFicha"></select>
+        </div>
     </div>
-    <div class="filtro-general">
-        <label><strong>Competición</strong></label>
-        <div style="color:white;font-weight:600;padding:4px 0;">Liga 1 2026</div>
-    </div>
-    <div class="filtro-general">
-        <label><strong>Seleccionar Jugador</strong></label>
-        <select id="selectorJugadorFicha"></select>
-    </div>
-</div>
 
-<div id="bloqueExportableFicha">
-<div class="introJugador">
-    <div class="fotoJugador">FotoJugador</div>
-    <div class="datosJugador">
-        <div class="nombreJugador">NombreJugador</div>
-        <div class="metaJugador">
-            <div class="nacionalidadBloque">
-                <img class="banderaNacionalidad" alt="Bandera" hidden>
-                <div class="nacionalidad">Nacionalidad</div>
-            </div>
-            <div class="clubBloque">
-                <img class="escudoClub" alt="Escudo" hidden>
-                <div class="club">Club</div>
-            </div>
-        </div>
-        <div class="metaJugador metaJugadorExtra">
-            <div class="datoJugador">
-                <span class="datoClave">Posición: </span><span class="posicionJugador">N/D</span>
-            </div>
-            <div class="metaSeparador">|</div>
-            <div class="datoJugador">
-                <span class="datoClave">Edad: </span><span class="edadJugador">N/D</span>
-            </div>
-            <div class="metaSeparador">|</div>
-            <div class="datoJugador">
-                <span class="datoClave">Minutos Jugados: </span><span class="minutosJugador">N/D</span>
-            </div>
-        </div>
-    </div>
-    <div class="scoreFinalJugador">
-        <div class="scoreFinalLabel">SCORE JUGADOR</div>
-        <div class="scoreFinalValor">N/D</div>
-    </div>
-</div>
-
-<div class="percentilesJugador">
-    <div class="cajaPercentiles cajaPercentilesIzquierda">
-        <img id="imagenPosicion" class="imagen-posicion" src="" alt="Posición" hidden>
-        <div class="similares-box">
-            <div class="similares-titulo">Top 10 Similares</div>
-            <ul id="listaSimilares" class="lista-similares"></ul>
-        </div>
-                <div class="bloque-exportar-ficha">
-                    <button id="btnExportarFicha" class="btn-exportar-ficha" type="button">Exportar PDF</button>
+    <div class="introJugador">
+        <div class="datosJugador">
+            <div class="nombreJugador">NombreJugador</div>
+            <div class="metaJugador">
+                <div class="nacionalidadBloque">
+                    <img class="banderaNacionalidad" alt="Bandera" hidden>
+                    <div class="nacionalidad">Nacionalidad</div>
                 </div>
-    </div>
-    <div class="cajaPercentiles cajaPercentilesDerecha">
-        <div class="bloquesMetricas">
-            <div class="bloqueOfensiva">
-                <div class="bloqueOfensivaTitulo">Ofensivo</div>
-                <div class="ofensivaMetricas"></div>
-                <p class="nota-creacion">*Asistencias p90 incluye asistencias de remates que no terminan en gol.</p>
+                <div class="clubBloque">
+                    <img class="escudoClub" alt="Escudo" hidden>
+                    <div class="club">Club</div>
+                </div>
             </div>
-            <div class="bloqueCreacion">
-                <div class="bloqueCreacionTitulo">Creación</div>
-                <div class="creacionMetricas"></div>
-                <p class="nota-creacion">**Construcción de Juego: Considera 2° y 3° Asistencia</p>
-            </div>
-            <div class="bloqueDefensivo">
-                <div class="bloqueDefensivoTitulo">Defensivo</div>
-                <div class="defensivaMetricas"></div>
+            <div class="metaJugador metaJugadorExtra">
+                <div class="datoJugador">
+                    <span class="datoClave">Posición: </span><span class="posicionJugador">N/D</span>
+                </div>
+                <div class="datoJugador">
+                    <span class="datoClave">Edad: </span><span class="edadJugador">N/D</span>
+                </div>
+                <div class="datoJugador">
+                    <span class="datoClave">Minutos Jugados: </span><span class="minutosJugador">N/D</span>
+                </div>
             </div>
         </div>
+        <div class="valorMercadoJugador">
+            <div class="valorMercadoLabel">Valor de Mercado</div>
+            <div class="valorMercadoValor">N/D</div>
+        </div>
+        <div class="scoreFinalJugador">
+            <div class="scoreFinalLabel">SCORE</div>
+            <div class="scoreFinalValor">N/D</div>
+        </div>
+</div>
+
+<div class="statsJugador">
+
+    <div class="percentilesJugador">
+
+        <div class="cajaPercentiles cajaPercentilesIzquierda">
+            <p class="titulo_imagen">Demarcación</p>
+
+            <img
+                id="imagenPosicion"
+                class="imagen-posicion"
+                src=""
+                alt="Posición"
+                hidden>
+
+            <div class="similares-box">
+                <div class="similares-titulo">
+                    Top 10 Similares
+                </div>
+
+                <ul id="listaSimilares" class="lista-similares"></ul>
+            </div>
+        </div>
+
+        <div class="cajaPercentiles cajaPercentilesDerecha">
+
+            <div class="bloquesMetricas">
+
+                <div class="bloqueOfensiva">
+                    <div class="bloqueOfensivaTitulo">Ofensivo</div>
+                    <div class="ofensivaMetricas"></div>
+
+                    <p class="nota-creacion">
+                        *Asistencias p90 incluye asistencias de remates que no terminan en gol.
+                    </p>
+                </div>
+
+                <div class="bloqueCreacion">
+                    <div class="bloqueCreacionTitulo">Creación</div>
+                    <div class="creacionMetricas"></div>
+
+                    <p class="nota-creacion">
+                        **Construcción de Juego: Considera 2° y 3° Asistencia
+                    </p>
+                </div>
+
+                <div class="bloqueDefensivo">
+                    <div class="bloqueDefensivoTitulo">Defensivo</div>
+                    <div class="defensivaMetricas"></div>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
+
     <div class="cajaRadar">
         <div class="titulo-radar">Atributos</div>
         <canvas id="radarChartFicha"></canvas>
     </div>
-</div>
 
 </div>
+
+    <div id="bloqueExportableFicha">
+        <div class="bloque-exportar-ficha">
+        <button id="btnExportarFicha" class="btn-exportar-ficha" type="button">Exportar Reporte</button>
+        </div>
+    </div>
 
 </body>
- </html>
+</html>
+

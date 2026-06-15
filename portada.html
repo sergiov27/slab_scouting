@@ -1,56 +1,91 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCOUT PRO - Portada</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2" rel="stylesheet">
-    <script defer src="portada.js"></script>
+<meta charset="UTF-8">
+<title>SCOUT PRO 360°</title>
+
+<link rel="stylesheet" href="css/styles.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.css">
+<script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.js"></script>
+
+<script defer src="js/radar_chart.js"></script>
+<script defer src="portada.js"></script>
+
 </head>
-<body class="page-portada-home">
+
+<body class="page-radar_chart has-sidebar">
 
 <header class="navbar">
+
+    <button id="btnToggleSidebar"
+            class="sidebar-toggle"
+            aria-label="Toggle sidebar">
+        ☰
+    </button>
+
     <div class="logo">
         <img src="logo_nobg.png" alt="Logo" class="logo-img">
-        SCOUT PRO 360°
+        <span class="nav-text">SCOUTING DATA DRIVEN FPF</span>
     </div>
-    <nav>
-        <a href="#" id="btnCerrarSesion"><b>CERRAR SESIÓN</b></a>
-    </nav>
+
+<nav>
+<a href="portada.html"><span class="nav-text">Inicio</span></a>
+<a href="dashboard.html"><span class="nav-text">General</span></a></b>
+<a href="scatterplot.html"><span class="nav-text">Análisis Comparativo</span></a>
+<a href="radar_chart.html"><span class="nav-text">Radar</span></a>
+<a href="ficha_individual.html"><span class="nav-text">Ficha Individual</span></a>
+<a href="#" id="btnCerrarSesion"><span class="nav-text">CERRAR SESION</span></a>
+</nav>
+
 </header>
 
-<main class="home-wrapper">
-    <section class="home-card-principal">
-        <img src="logo_nobg.png" alt="SCOUT PRO" class="home-logo">
-        <h1 class="home-titulo">Bienvenido a Scout Pro 360°</h1>
-        <p class="home-subtitulo">Selecciona una sección para continuar</p>
-        <p class="home-usuario">Sesión iniciada como <span id="usuarioActivo">usuario</span></p>
-    </section>
+<div class="radar-section">
 
-    <section class="home-grid-secciones">
-        <a href="dashboard.html" class="home-seccion-link">
-            <article class="home-seccion-card">
-                <h2>Dashboard</h2>
-                <p>Vista general de jugadores y filtros por posición/minutos.</p>
-            </article>
-        </a>
+    <h3 class="titulo-comparador">Comparador de Jugadores</h3>
 
-        <a href="scatterplot.html" class="home-seccion-link">
-            <article class="home-seccion-card">
-                <h2>Scouting</h2>
-                <p>Análisis comparativo, scatter y radares entre jugadores.</p>
-            </article>
-        </a>
+        <div class="comparador-layout">
+            <div class="barra-radar">
+                <h3 class="titulo-filtros-radar">Seleccionar Jugadores</h3>
+                <div class="filtro-radar-box">
+                    <label>Jugador 1</label>
+                    <select id="jugador1"></select>
+                </div>
 
-        <a href="ficha_individual.html" class="home-seccion-link">
-            <article class="home-seccion-card">
-                <h2>Ficha Individual</h2>
-                <p>Detalle de perfil, percentiles y jugadores similares.</p>
-            </article>
-        </a>
-    </section>
-</main>
+                <div class="filtro-radar-box">
+                    <label>Jugador 2</label>
+                    <select id="jugador2"></select>
+                </div>
+            </div>
+
+        <div class="contenedor-radares">
+            <div class="radar-box">
+                <div class="titulo-radar">Perfil Ofensivo</div>
+                <canvas id="radarChart"></canvas>
+            </div>
+
+            <div class="radar-box">
+                <div class="titulo-radar">Perfil Defensivo</div>
+                <canvas id="radarDefensivo"></canvas>
+            </div>
+
+            <div class="radar-box">
+                <div class="titulo-radar">Perfil Creativo</div>
+                <canvas id="radarCreacion"></canvas>
+            </div>
+        </div>
+
+    </div>
+    <p class="nota-radares">Las metricas mostradas corresponden a acciones exitosas (p. ej., pases progresivos completados, regates exitosos).</p>
+</div>
 
 </body>
 </html>

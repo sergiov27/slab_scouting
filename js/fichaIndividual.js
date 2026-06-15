@@ -280,7 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	};
 
 	const escudosPeruPorClub = {
-		ADT: "adt.png",
+		"ADT": "adt.png",
 		"Alianza Atletico": "alianza_atletico.PNG",
 		"Alianza Atlético": "alianza_atletico.PNG",
 		"Alianza AtlÃ©tico": "alianza_atletico.PNG",
@@ -290,17 +290,17 @@ document.addEventListener("DOMContentLoaded", () => {
 		"AtlÃ©tico Grau": "atletico_grau.png",
 		"FC Cajamarca": "cajamarca.png",
 		"Los Chankas": "chankas.png",
-		Cienciano: "cienciano.png",
+		"Cienciano": "cienciano.png",
 		"Comerciantes Unidos": "comerciantes.png",
-		Cusco: "cusco.png",
+		"Cusco": "cusco.png",
 		"Deportivo Garcilaso": "garcilaso.png",
 		"Sport Huancayo": "huancayo.png",
 		"Juan Pablo II College": "juanpablo.png",
-		Melgar: "melgar.png",
+		"Melgar": "melgar.png",
 		"CD Moquegua": "moquegua.png",
 		"Sport Boys": "sport_boys.png",
 		"Sporting Cristal": "sporting_cristal.png",
-		Universitario: "universitario.png",
+		"Universitario": "universitario.png",
 		"UTC Cajamarca": "utc.png"
 	};
 
@@ -540,7 +540,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	function obtenerClub(jugador) {
 		return (
-			jugador?.equipo_durante_el_periodo_seleccionado ||
+			jugador?.equipo_periodo ||
 			jugador?.equipo ||
 			"N/D"
 		);
@@ -737,7 +737,7 @@ function crearRadarFicha() {
 				legend: { display: false },
 				datalabels: {
 					formatter: value => Math.round(value),
-					color: "#ffffff",
+					color: "#000000",
 					font: { weight: "bold", size: 10 },
 					backgroundColor: "rgba(16,185,129,0.9)",
 					borderRadius: 50,
@@ -1020,3 +1020,4 @@ function actualizarEscudo(liga, jugador) {
 	cargarJugadores();
 
 });
+
